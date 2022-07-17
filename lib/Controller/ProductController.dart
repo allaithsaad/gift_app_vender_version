@@ -34,7 +34,8 @@ class ProductController extends GetxController {
     await ProductService().getProduct().then((value) {
       for (int i = 0; i < value.length; i++) {
         _productModel.add(
-            ProductModel.fromJson(value[i].data() as Map<dynamic, dynamic>));
+          ProductModel.fromJson(value[i].data() as Map<dynamic, dynamic>),
+        );
       }
 
       _loading.value = false;

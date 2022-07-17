@@ -10,17 +10,17 @@ import 'LoginController.dart';
 
 class ButtonBarController extends GetxController {
   inStart2() async {
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-      if (user == null) {
-        print('User is currently signed out!');
-      } else {
-        final local = Get.find<LoginController>();
-        await local
-            .setSPUser(user.uid)
-            .then((value) => local.getCurrentUserSPData());
-        print('User is signed in!');
-      }
-    });
+    // FirebaseAuth.instance.authStateChanges().listen((User? user) async {
+    //   if (user == null) {
+    //     print('User is currently signed out!');
+    //   } else {
+    //     final local = Get.find<LoginController>();
+    //     await local
+    //         .setSPUser(user.uid)
+    //         .then((value) => local.getCurrentUserSPData());
+    //     print('User is signed in!');
+    //   }
+    // });
   }
 
   int _navigatorValue = 0;

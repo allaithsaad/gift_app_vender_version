@@ -7,6 +7,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:657928375472:android:6713f9d94bf0eabc443f75",
+        "android_client_info": {
+          "package_name": "com.example.the_store_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657928375472-06p46lkdkn8k1mbm520ru0crihb1sv9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyqIB_BujMQCEGFsjyL8j4A5GFg8x2R68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657928375472-06p46lkdkn8k1mbm520ru0crihb1sv9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:657928375472:android:e9c7a0678a942f2e443f75",
         "android_client_info": {
           "package_name": "com.laithapp"
@@ -14,11 +43,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "657928375472-qct944dat5frbhpqj2anisic36fk7np2.apps.googleusercontent.com",
+          "client_id": "657928375472-rqjq64r2mvj2hpg9oqen4jlvspabao7k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.laithapp",
-            "certificate_hash": "57e19e50ca2fae307cce75554beeef29bb2aa823"
+            "certificate_hash": "551db63fe62d0689da00f78ea3b3e5f216791a0e"
           }
         },
         {
@@ -44,18 +73,47 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:657928375472:android:096b39c230ca1851443f75",
+        "mobilesdk_app_id": "1:657928375472:android:c6b692f742aea042443f75",
         "android_client_info": {
           "package_name": "com.storeapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "657928375472-05uqai3okbotbelhk454b7tb5fc8lg6d.apps.googleusercontent.com",
+          "client_id": "657928375472-06p46lkdkn8k1mbm520ru0crihb1sv9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyqIB_BujMQCEGFsjyL8j4A5GFg8x2R68"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657928375472-06p46lkdkn8k1mbm520ru0crihb1sv9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657928375472:android:bd75976d8c8d3d17443f75",
+        "android_client_info": {
+          "package_name": "laithsd.giftapp4stores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657928375472-8ouqk55pnt0b4mdid467130jf8j0pbci.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.storeapp",
-            "certificate_hash": "57e19e50ca2fae307cce75554beeef29bb2aa823"
+            "package_name": "laithsd.giftapp4stores",
+            "certificate_hash": "a803af7373e9a18a81677b11f2e212d758aa2889"
           }
         },
         {
@@ -93,43 +151,6 @@
           "android_info": {
             "package_name": "laithsd.mkapp",
             "certificate_hash": "a803af7373e9a18a81677b11f2e212d758aa2889"
-          }
-        },
-        {
-          "client_id": "657928375472-06p46lkdkn8k1mbm520ru0crihb1sv9q.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCyqIB_BujMQCEGFsjyL8j4A5GFg8x2R68"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "657928375472-06p46lkdkn8k1mbm520ru0crihb1sv9q.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:657928375472:android:bd1c39c53890f407443f75",
-        "android_client_info": {
-          "package_name": "laithsd.shopdata"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "657928375472-rsdhpgjatbit2ikbl0rgfih6agq8dbb6.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "laithsd.shopdata",
-            "certificate_hash": "57e19e50ca2fae307cce75554beeef29bb2aa823"
           }
         },
         {

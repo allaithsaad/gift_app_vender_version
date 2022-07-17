@@ -159,7 +159,6 @@ class UserinfoScreen extends StatelessWidget {
               child: TextButton(
                   onPressed: () {
                     FirebaseAuth.instance.signOut();
-                    // loginController.deleteSPUser();
                     Get.offAll(LoginScreen());
                   },
                   child: Text("Exit")),

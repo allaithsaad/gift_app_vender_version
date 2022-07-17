@@ -5,10 +5,12 @@ class StoreModel {
     required this.name,
     required this.shopBackground,
     required this.accountingId,
-    required this.phoneNumer,
+    required this.phoneNumber,
     required this.storeId,
     required this.notes,
-    required this.states,
+    required this.nameE,
+    required this.shortId,
+    required this.status,
     required this.storeLocation,
   });
 
@@ -17,20 +19,24 @@ class StoreModel {
           name: json['name']! as String,
           shopBackground: json['shopBackground']! as String,
           accountingId: json['accountingId']! as String,
-          phoneNumer: json['phoneNumer']! as String,
+          phoneNumber: json['phoneNumber']! as String,
           storeId: json['storeId']! as String,
           notes: json['notes']! as String,
-          states: json['states']! as bool,
+          nameE: json['nameE']! as String,
+          shortId: json['shortId']! as String,
+          status: json['status']! as bool,
           storeLocation: json['storeLocation']! as GeoPoint,
         );
 
   final String name;
   final String shopBackground;
   final String accountingId;
-  final String phoneNumer;
+  final String phoneNumber;
   final String storeId;
   final String notes;
-  final bool states;
+  final String nameE;
+  final String shortId;
+  final bool status;
   final GeoPoint storeLocation;
 
   Map<String, Object?> toJson() {
@@ -38,10 +44,12 @@ class StoreModel {
       'name': name,
       'shopBackground': shopBackground,
       'accountingId': accountingId,
-      'phoneNumer': phoneNumer,
+      'phoneNumber': phoneNumber,
       'storeId': storeId,
       'notes': notes,
-      'states': states,
+      'nameE': nameE,
+      'shortId': shortId,
+      'status': status,
       'storeLocation': storeLocation,
     };
   }

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:storeapp/Controller/LoginController.dart';
+
 import 'dart:math';
 import '/Controller/ProductController.dart';
 import '/Screens/product_screen.dart';
@@ -60,7 +60,7 @@ class _StoreScreenState extends State<StoreScreen> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          'Store name', //LoginController.storeSPData.name!
+                                          'هديا السفير ', //LoginController.storeSPData.name!
                                           style: TextStyle(
                                             color: Colors.purple,
                                             fontSize: 20.0,
@@ -213,7 +213,7 @@ class _ProductStateGridState extends State<ProductStateGrid> {
                       height: 200,
                       width: 200,
                       child: CachedNetworkImage(
-                        imageUrl: pathCat[index].image.toString(),
+                        imageUrl: pathCat[index].image![0].toString(),
                         fit: BoxFit.cover,
                         placeholder: (context, url) => SpinKitCubeGrid(
                           color: Colors.grey[50],
@@ -275,7 +275,7 @@ class _ProductStateGridState extends State<ProductStateGrid> {
                                                     const EdgeInsets.all(2.0),
                                                 child: CachedNetworkImage(
                                                   imageUrl: pathCat[index]
-                                                      .image
+                                                      .image[0]
                                                       .toString(),
                                                   fit: BoxFit.cover,
                                                 ),
@@ -504,7 +504,7 @@ class _ProductStateGridState extends State<ProductStateGrid> {
           onTap: () => Get.to(
               () => ProductScreen(
                   pathCat[index].name.toString(),
-                  pathCat[index].image.toString(),
+                  pathCat[index].image[0].toString(),
                   pathCat[index].price!,
                   pathCat[index].productId!,
                   pathCat[index].description.toString()),

@@ -1,23 +1,90 @@
-import 'dart:convert';
-
+import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:storeapp/Models/store_model.dart';
-import '../constant.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '/Screens/ControlScreen.dart';
 
 class LoginController extends GetxController {
+  late Box box1;
+  var storeNameE = ''.obs;
+  var storeName = ''.obs;
+  var storeImageUrl = ''.obs;
+  var shortId = ''.obs;
+  var phoneNumber = '770000002'.obs;
+  var password = '000000'.obs;
+
+  @override
+  void onInit() {
+    createOpenBox();
+
+    super.onInit();
+  }
+
+  Future<void> createOpenBox() async {
+    box1 = await Hive.openBox('logindata');
+  }
+
+  void storeTheStoreDate(
+      String name, String nameE, String shopBackground, String shortId) {
+    box1.put('name', name);
+    box1.put('nameE', nameE);
+    box1.put('shopBackground', shopBackground);
+    box1.put('shortId', shortId);
+    log(name);
+    log(nameE);
+    log(shopBackground);
+    log(shortId);
+  }
+
+  void getStoreName() async {
+    if (box1.isOpen) {
+      if (box1.get('name') != null) {
+        storeName.value = box1.get('name');
+        update();
+      }
+      if (box1.get('nameE') != null) {
+        storeNameE.value = box1.get('nameE');
+        update();
+      }
+      if (box1.get('shopBackground') != null) {
+        storeImageUrl.value = box1.get('shopBackground');
+        update();
+      }
+      if (box1.get('shortId') != null) {
+        shortId.value = box1.get('shortId');
+        update();
+      }
+    } else {
+      await createOpenBox();
+      await Hive.openBox('logindata');
+      if (box1.get('name') != null) {
+        storeName.value = box1.get('name');
+        update();
+      }
+      if (box1.get('nameE') != null) {
+        storeNameE.value = box1.get('nameE');
+        update();
+      }
+      if (box1.get('shopBackground') != null) {
+        storeImageUrl.value = box1.get('shopBackground');
+        update();
+      }
+      if (box1.get('shortId') != null) {
+        shortId.value = box1.get('shortId');
+        update();
+      }
+    }
+  }
+
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   FirebaseAuth _auth = FirebaseAuth.instance;
-  StoreModel get storeSPData => _storeSPData;
-  late StoreModel _storeSPData;
-  loginRequest(
-      String phoneNumber, String password, BuildContext context) async {
+
+  loginRequest(BuildContext context) async {
     Loader.show(context,
         isSafeAreaOverlay: false,
         isAppbarOverlay: true,
@@ -30,8 +97,8 @@ class LoginController extends GetxController {
         overlayColor: Color(0x99E8EAF6));
     await _firestore
         .collection('Store')
-        .where('phoneNumber', isEqualTo: "+967$phoneNumber")
-        .where('password', isEqualTo: password)
+        .where('phoneNumber', isEqualTo: "+967${phoneNumber.value}")
+        .where('password', isEqualTo: password.value)
         .get()
         .then((value) async {
       if (value.docs.isNotEmpty) {
@@ -39,16 +106,26 @@ class LoginController extends GetxController {
         try {
           await FirebaseAuth.instance
               .signInWithEmailAndPassword(
-                  email: value.docs.first.get('email'),
-                  password: value.docs.first.get("emailPassword"))
+                  email: value.docs.first.data()['email'],
+                  password: value.docs.first.data()['emailPassword'])
               .then((value) async {
             if (_auth.currentUser!.uid.isNotEmpty) {
-              await setSPUser(_auth.currentUser!.uid).then((value) async {
-                await getCurrentUserSPData().then((value) {
-                  print(_auth.currentUser!.uid);
-                  Get.offAll(ControlScreen());
+              String id = _auth.currentUser!.uid;
+              await FirebaseFirestore.instance
+                  .collection("Store")
+                  .doc(id)
+                  .get()
+                  .then((value) async {
+                if (value.exists) {
+                  /** */
+                  storeTheStoreDate(value.get("name"), value.get("nameE"),
+                      value.get("shopBackground"), value.get("shortId"));
+                  getStoreName();
+                  print("---------------------------------------");
+                  print(value.data());
                   Loader.hide();
-                });
+                  Get.offAll(ControlScreen());
+                }
               });
             }
           });
@@ -73,68 +150,12 @@ class LoginController extends GetxController {
     });
   }
 
-  Future<void> getCurrentUserSPData() async {
-    StoreModel? _storeData = await getSPUser;
-
-    if (_storeData == null) {
-    } else {
-      _storeSPData = _storeData;
-    }
-
-    update();
-  }
-
-  Future<void> setSPUser(String id) async {
-    print(id);
-    FirebaseAuth.instance.authStateChanges().listen((User? user) async {
-      if (user.isBlank!) {
-        print('User is currently signed out!');
-      } else {
-        print(id);
-        SharedPreferences pref = await SharedPreferences.getInstance();
-        await FirebaseFirestore.instance
-            .collection('Store')
-            .doc(id)
-            .get()
-            .then((value) async {
-          await pref.setString(CACHED_USER_DATA,
-              json.encode(StoreModel.fromJson(value.data()!)));
-        });
-        print('User is signed in!');
-      }
-    });
-  }
-
-  Future<DocumentSnapshot<Map<dynamic, dynamic>>> _getCurrentUser(
-      String id) async {
-    return await FirebaseFirestore.instance.collection('Store').doc(id).get();
-  }
-
-  Future<StoreModel?> get getSPUser async {
-    try {
-      StoreModel? userModel;
-      userModel = await _getUserData();
-      return userModel;
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
-  Future<StoreModel> _getUserData() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    var value = pref.getString(CACHED_USER_DATA);
-    return StoreModel.fromJson(json.decode(value!));
-  }
-
-  void deleteSPUser() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.clear();
-  }
-
   @override
   void dispose() {
+    box1.close();
+
     // TODO: implement dispose
-    Loader.hide();
+
     super.dispose();
   }
 }
