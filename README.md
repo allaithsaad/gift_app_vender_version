@@ -13,7 +13,7 @@ this app for the store owners so they can upload and control their products to t
 ## [video in how to use it ](https://mega.nz/embed/geoE0JqR#4zlZxLCLGoHju2UgoeJAffhCV2GlGbpivwjZ6MVzmlo)
  
 ## packages used in this project
-```dart
+```yaml
   badges: ^2.0.1
   bottom_navy_bar: ^6.0.0
   cached_network_image: ^3.1.0
